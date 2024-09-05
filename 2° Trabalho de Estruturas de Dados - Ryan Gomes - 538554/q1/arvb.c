@@ -124,55 +124,17 @@ int folhas_primos(ArvB* a){
 	return folhas_primos(a->esq) + folhas_primos(a->dir);
 }
 
-int dois_filhos(ArvB *a) {
-    if (arvb_vazia(a)) {
-        return 0;
-    }
-    
-    int cont = 0;
-    
-    if (a->esq != NULL && a->dir != NULL) {
-        cont = 1;
-    }
-    
-    cont += dois_filhos(a->esq);
-    cont += dois_filhos(a->dir);
-    
-    return cont;
-}
-
-
-/*int dois_filhos(ArvB* a){
+int dois_filhos(ArvB* a){
 	if(a == NULL){
 		return 0;
 	} else if(a->esq != NULL && a->dir != NULL){
-		return 1 + folhas_primos(a->esq) + folhas_primos(a->dir);
+		return 1 + dois_filhos(a->esq) + dois_filhos(a->dir);
 	}
 	
-	return folhas_primos(a->esq) + folhas_primos(a->dir);
-}*/
-
-int nos_igual_altura(ArvB* a) {
-    if (arvb_vazia(a)) {
-        return 0;
-    }
-
-    int hEsq = arv_altura(a->esq);
-    int hDir = arv_altura(a->dir);
-    int cont = 0;
-
-    if (arv_altura(a->esq) == arv_altura(a->dir)) {
-        cont = 1;
-    }
-
-    cont += nos_igual_altura(a->esq);
-    cont += nos_igual_altura(a->dir);
-    
-    return cont;
+	return dois_filhos(a->esq) + dois_filhos(a->dir);
 }
 
-
-/*int nos_igual_altura(ArvB* a){
+int nos_igual_altura(ArvB* a){
 	if(a == NULL){
 		return 0;
 	} else if(arv_altura(a->esq) == arv_altura(a->dir)){
@@ -180,4 +142,32 @@ int nos_igual_altura(ArvB* a) {
 	}
 	
 	return nos_igual_altura(a->esq) + nos_igual_altura(a->dir);
+}
+
+int iguais(ArvB* a, ArvB* b) {
+    if (arvb_vazia(a) && arvb_vazia(b)) {
+        return 1;
+    }else if (arvb_vazia(a) || arvb_vazia(b)) {
+        return 0;
+    }
+    
+    return (a->info == b->info) && iguais(a->esq, b->esq) && iguais(a->dir, b->dir);
+}
+
+
+/*int iguais(ArvB* a, ArvB* b){
+	if(a == NULL && b != NULL){
+		return 0;
+	} else if(a != NULL && b == NULL){
+		return 0;
+	} else if(a == NULL && b == NULL){
+		return 1;
+	}
+	
+	while(a->esq == b->esq){
+		while(a->dir == b->dir){
+			return iguais(a->dir, b->dir);
+		}
+		return iguais(a->dir, b->dir);
+	}
 }*/

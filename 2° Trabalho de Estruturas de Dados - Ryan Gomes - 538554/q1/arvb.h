@@ -32,3 +32,6 @@ int dois_filhos(ArvB* a);
 
 /*Retorna a quantidade de nós cujas subárvores esquerda e direita têm igual altura.*/
 int nos_igual_altura(ArvB* a);
+
+/*Compara se duas árvores binárias de busca são iguais.*/
+int iguais(ArvB* a, ArvB* b);
